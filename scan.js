@@ -71,9 +71,17 @@ function processFileName(fileName) {
                 var dest = 'static/videos/' + res.results[i].id + '.mp4';
                 child = exec('ln -s "' + source + '" "' + dest + '"');
 
-                mdb.movieInfo({id: movie_id },function(err,res){
-                    db.movie.save(res);
-                });
+               mdb.movieInfo({id: res.results[i].id}, function (err, movieres) {
+				 //   console.log(movieres.id);
+					//retrieve and store list of available translations
+					mdb.movieTranslations({id:movieres.id}, function (err, transres) {
+				   //     console.log(transres.translations);
+						movieres.translations = transres.translations;
+						console.log(movieres);
+						db.movie.save(movieres);
+
+					});
+				});
 
                 //retrieve Youtube link for movie trailer
                 mdb.movieTrailers({id: movie_id },function(err,res){
@@ -101,11 +109,11 @@ function processFileName(fileName) {
 
                 });
 
-                //retrieve and store list of available translations
+               /*  //retrieve and store list of available translations
                 mdb.movieTranslations({id: res.results[i].id}, function (err, res) {
                   //  console.log(res);
                     db.translations.save(res);
-                });
+                }); */
 
                 //retrieve and store all available images(backdrop and posters) for specific movie
                 mdb.movieImages({id: res.results[i].id}, function (err, res) {

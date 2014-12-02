@@ -1,3 +1,4 @@
+var mdb = require('moviedb')('fb92666a2288e824aaa575b983c6e182');
 var express = require('express');
 var app = express();
 var databaseUrl = "moviedb"; // "username:password@example.com/mydb"
@@ -53,6 +54,20 @@ app.get('/movie/:id', function(req,res){
 		res.send(JSON.stringify({movies : data} ));
 
 	});
+});
+
+// return movie information according to particular locale
+app.get('/movie/translations/:id/:lang',function(req,res){
+   var movieId = req.params.id;
+   var lang = req.params.lang;
+   var searchId = '{' + '"id":' + movieId  + ',"language":"' + lang + '"}';
+   console.log(searchId);
+   mdb.movieInfo(JSON.parse(searchId), function(err,data){
+      console.log(data);
+      var d = [];
+      d.push(data);
+      res.send(JSON.stringify({movies: d}));
+   })
 });
 //returns all the genres present in movie database
 app.get('/allgenres',function(req,res) {
