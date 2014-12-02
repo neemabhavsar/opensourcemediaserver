@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+		<title>Movie Detail</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="css/moviedetailstyle.css">
+		
+		<script src="jquery-2.1.1.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="moviedetails.js"></script>
+		<style>
+			body {
+				background-image: url(images/bb.jpg);
+			}
+		</style>
+	</head>
+	<body >
+	<div class="container">
+			<div class="row news" style="margin-left:-20%">
+				<div class="col-xs-4" >
+					<img id ="movie_poster" class="img-responsive picsGall" src="" />	
+					
+				</div>
+				<div class="col-xs-8 ">
+					<h3 id="movie_title"> </h3>
+					<br>
+					<h3>
+						<div class="col-xs-6" >
+						<h2>Release Date</h2> <p id="release_date">2014</p>
+						<h2>Runtime</h2><p id="runtime"></p>
+						</div>
+						<div class="col-xs-6" >
+						<h2>Genre<h2>
+						<p id="genre_set"></p>
+						<h2>Languages<h2>
+						<p id="language_set"></p>	
+						</div>		
+					</h3>							
+						
+				</div>		
+				<div style="margin-left:55%" >
+				<a href="#" id="movieLink" class="myButton">Play</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="#" id="movieTrailerLink"  class="myButton1">Watch Trailer</a>
+				</div>	
+			</div>	
+								
+			<div class="row news" style="margin-left:20%">
+			
+			<div class="col-md-12">
+			<p id="movie_desc">
+						
+					</p>
+					</div>
+			</div>
+	</div>
+		
+						
+		</div>
+		<div id="similarcollection" class="portfolio_block columns3   pretty"
+					data-animated="fadeIn">
+				</div>
+
+		
+	</body>	
+</html>
