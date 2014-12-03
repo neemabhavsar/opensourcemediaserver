@@ -2,32 +2,6 @@ $( document ).ready(function() {
 
 });
 
-
-function getTvShows(){
-	$.get('/tvShows',function(data){
-		var tv = JSON.parse(data);
-		tvShows = tv.tvShows;
-		for (var i = 0 ; i<tvShows.length ; i++) {
-			var div = "<div class=\"element col-sm-4   gall branding\">"
-			div += "<a class=\"plS\" href=/tvShow_seasons.html#"+tvShows[i].id+ " rel=\"prettyPhoto[gallery2]\"> "+
-			"<img id=\"i0\"	class=\"img-responsive picsGall \""+
-			"src=http://image.tmdb.org/t/p/w500"+tvShows[i].poster_path + " alt=\""+tvShows[i].original_title +"\" />"
-			+"</a>"
-			+"<div class=\"view project_descr \"> <h3> <a href=/tvShow_seasons.html#"+tvShows[i].id+">"+tvShows[i].original_title
-			+" </a> </h3>"
-			+" <ul> "
-			+" <li><i class=\"fa fa-eye\"></i> "
-			+tvShows[i].vote_count
-			+" </li><li><a class=\"heart\" href=\"#\"> "
-			+" <i class=\"fa-heart-o\"></i> "
-			+ tvShows[i].vote_average
-			+" </a></li></ul></div></div> ";
-			$("#tvShows").append(div);
-		}
-	});
-}
-
-
 function getTvShowsList() {
 	$.get('/tvShows',function(data){
 		var tv = JSON.parse(data);
@@ -67,23 +41,22 @@ function getTvShowsSeasonsList() {
 		$("#tvShowName").html(tvShowName);
 		$("#tvShowOverview").html(tvShowDesc);
 		$("#episode_poster").attr('src', posterBaseUrl + tvShowPoster );	
-		$("#tvShowStatus").html("Status ::" + status);
-		$("#tvShowRating").html("Rating ::" + rating);
-
+		$("#tvShowStatus").html(status);
+		$("#tvShowRating").html(rating);
+		
 		for (var i = 0 ; i<tvShowPresent.length ; i++) {
-			var imgSrc = posterBaseUrl + seasons[tvShowPresent[i]].poster_path;
-			var season_num = seasons[tvShowPresent[i]].season_number;
-			var wstr = "";
-			wstr += "<li>";
-			wstr += '<img src="' + imgSrc +'" height="200" width="200">'
-			wstr += '</img>';
-			wstr += '<a href="/tvShow_episodes.html?tvShowId=' + id + '&seasonNum='+ season_num +  '"">'
-			wstr += 'Season ::' + season_num ;
-			wstr += '</a>';
-			wstr += "</li>";
-			console.log(wstr);
-			$("#tvSeasonsList").append(wstr);
-		};
+		var season_num = seasons[tvShowPresent[i]].season_number;
+			var div = "<div class=\"element col-sm-4   gall branding\">"
+			div += "<a class=\"plS\" href=/tvShow_episodes.html?tvShowId="+id +'&seasonNum='+ season_num + " rel=\"prettyPhoto[gallery2]\"> "+
+			"<img id=\"i0\"	class=\"img-responsive picsGall \""+
+			"src=http://image.tmdb.org/t/p/w500"+seasons[tvShowPresent[i]].poster_path +" />"
+			+"</a>"
+			+"<div class=\"view project_descr \"> <h3> <a href=/tvShow_episodes.html?tvShowId=" + id + '&seasonNum='+ season_num +  '"">'
+			+" </a> </h3>"
+			+"</div></div> ";
+			$("#tvSeasonsList").append(div);
+		}
+		
 
 	});
 }
@@ -111,29 +84,28 @@ function getTvShowsEpisodesList() {
 		var airDate = season_info.air_date;
 		var posterPath = season_info.poster_path;
 		var episodes = season_info.episodes;
-
+		var seasonName = season_info.name;
 		$("#tvSeasonOverview").html(overview);
 		$("#tvSeasonAirDate").html(airDate);
-		$("#episodePoster").attr('src',posterBaseUrl + posterPath);
+		$("#tvSeasonPoster").attr('src',posterBaseUrl + posterPath);
+		$("#tvSeasonName").html(seasonName);
 
-
-		for( var i = 0 ; i < tvEpisodesPresent.length ; i++) {
+	
+		for (var i = 0 ; i<tvEpisodesPresent.length ; i++) {
 			var name = episodes[tvEpisodesPresent[i] - 1].name;	
 			var episodeNum = episodes[tvEpisodesPresent[i] - 1].episode_number;
-			var stillPath = episodes[tvEpisodesPresent[i] - 1].still_path;
-			var imgSrc = posterBaseUrl + stillPath;
-
-			var wstr = "";
-			wstr += "<li>";
-			wstr += '<img src="' + imgSrc +'" height="200" width="200">'
-			wstr += '</img>';
-			wstr += '<a href="/tvShow_episodesDetails.html?tvShowId=' + tvShowId + '&seasonNum='+ tvSeasonNum + '&episodeNum='+ episodeNum +  '"">';
-			wstr += 'Episode Number ::' + episodeNum + ":: " + name ;
-			wstr += '</a>';
-			wstr += "</li>";
-			console.log(wstr);
-			$("#tvEpisodesList").append(wstr);
+	
+			var div = "<div class=\"element col-sm-4   gall branding\">"
+			div += "<a class=\"plS\" href=/tvShow_episodesDetails.html?tvShowId=" + tvShowId + '&seasonNum='+ tvSeasonNum + '&episodeNum='+ episodeNum  + " rel=\"prettyPhoto[gallery2]\"> "+
+			"<img id=\"i0\"	class=\"img-responsive picsGall \" src=http://image.tmdb.org/t/p/w500/"+episodes[tvEpisodesPresent[i] - 1].still_path+" />"
+			+"</a>"
+			+"<div class=\"view project_descr \"> <h3> <a style=\"color:white;\" href=/tvShow_episodesDetails.html?tvShowId=" + tvShowId + '&seasonNum='+ tvSeasonNum + '&episodeNum='+ episodeNum  +  '"">'
+			+episodeNum + ":: " + name 
+			+" </a> </h3>"
+			+"</div></div> ";
+			$("#tvEpisodesList").append(div);
 		}
+
 	});
 }
 
@@ -147,6 +119,7 @@ function getTvEpisodeDetails() {
 	var url = "/tvShows/" + tvShowId + "/seasons/" + tvSeasonNum + "/episodes/" + tvEpisodeNum;
 	var id = tvShowId + "_" + tvSeasonNum + "_" + tvEpisodeNum;
 	var videoUrl = '/tvShows/' + id ;
+	console.log(url + "::" + id);
 
 	var posterBaseUrl = "http://image.tmdb.org/t/p/w300/";
 
@@ -158,6 +131,6 @@ function getTvEpisodeDetails() {
 		$("#tvShowName").html(tvShow.name);
 		$("#tvShowOverview").html(tvShow.overview);
 		$("#tvShow").html('<source src="' +  videoUrl + '"></source>');
-		$("#tvShowAirDate").html('Air Date ::' + tvShow.air_date);
+		$("#tvShowAirDate").html(tvShow.air_date);
 	});
 }

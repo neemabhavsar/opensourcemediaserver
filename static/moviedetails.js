@@ -99,7 +99,7 @@ function getSimilarMovies(){
 			}
 			var div = "<div class=\"element col-sm-4   gall branding\">"
 			div += "<img id=\"i0\"	class=\"img-responsive picsGall \""+
-			"src=http://image.tmdb.org/t/p/w300"+movies[i].poster_path + " alt=\""+movies[i].original_title +"\" />"			
+			"src=http://image.tmdb.org/t/p/w500"+movies[i].poster_path + " alt=\""+movies[i].original_title +"\" />"			
 			+"<div class=\"view project_descr \"> <h3 style='color: white;'>"+movies[i].original_title+"</h3>"
 			+" <ul> "
 			+" <li><i class=\"fa fa-eye\"></i> "

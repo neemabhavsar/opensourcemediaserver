@@ -119,10 +119,10 @@ border: none;
 #menu{
 	//margin-top: 33px;
 	margin-top: 74px;
-	float: right;
+	//float: right;
 }
 #menu li a{
-	color:#fff;
+	color:#0A0101;
 	text-decoration:none;
 }
 #menu li a:hover{
@@ -2085,7 +2085,7 @@ margin-bottom: 35px !important;
         top: -65px; 
         padding:20px 0;
         width:100%;
-		background-color: #101010!important;
+		background-color: #893D3D!important;
     }
 
 /**/

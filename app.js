@@ -2,7 +2,7 @@ var mdb = require('moviedb')('fb92666a2288e824aaa575b983c6e182');
 var express = require('express');
 var app = express();
 var databaseUrl = "moviedb"; // "username:password@example.com/mydb"
-var collections = ["movie","genre","translations","reviews","trailers","tvShow","tvShowCollection","tvSeasons","episodes","images","similar","toprated"];
+var collections = ["movie","genre","translations","reviews","trailers","tvShow","tvShowCollection","tvSeasons","tvEpisodes","images","similar","toprated"];
 var db = require("mongojs").connect(databaseUrl, collections);
 
 app.use(express.static(__dirname + '/static'));
@@ -169,8 +169,8 @@ app.get('/tvShows/:id/seasons/:seasonNum/episodes/:episodeNum', function (req, r
 	var tvShowId = parseInt(req.params.id);
 	var seasonNum = parseInt(req.params.seasonNum);
 	var episodeNum = parseInt(req.params.episodeNum);
-
-	db.episodes.find({tvShowID : tvShowId, season_number: seasonNum, episode_number : episodeNum}, function(err,data){
+	console.log(tvShowId + "::" + seasonNum);
+	db.tvEpisodes.find({tvShowID : tvShowId, season_number: seasonNum, episode_number : episodeNum}, function(err,data){
 		res.send(JSON.stringify({tvShowEpisodeDetails : data[0]} ));
 	});
 });

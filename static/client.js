@@ -39,9 +39,9 @@ function getTvShows(){
 			var div = "<div class=\"element col-sm-4   gall branding\">"
 			div += "<a class=\"plS\" href=/tvShow_seasons.html#"+tvShows[i].id+ " rel=\"prettyPhoto[gallery2]\"> "+
 			"<img id=\"i0\"	class=\"img-responsive picsGall \""+
-			"src=http://image.tmdb.org/t/p/w500"+tvShows[i].poster_path + " alt=\""+tvShows[i].original_title +"\" />"
+			"src=http://image.tmdb.org/t/p/w500"+tvShows[i].poster_path + " alt=\""+tvShows[i].original_name +"\" />"
 			+"</a>"
-			+"<div class=\"view project_descr \"> <h3> <a href=/tvShow_seasons.html#"+tvShows[i].id+">"+tvShows[i].original_title
+			+"<div class=\"view project_descr \"> <h3> <a href=/tvShow_seasons.html#"+tvShows[i].id+">"+tvShows[i].original_name
 			+" </a> </h3>"
 			+" <ul> "
 			+" <li><i class=\"fa fa-eye\"></i> "
